@@ -1,22 +1,61 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+} from "react-native";
+import { styles } from "./styles";
 
-export default function App() {
+const TodoApp = () => {
+  const filterOptions = ["All", "Active", "Done"];
+
   return (
     <View style={styles.container}>
-      <Text>
-        Open up App.js to start working on your app!klhkukllyukjkk;o;o
-      </Text>
-      <StatusBar style="auto" />
+      <Text style={styles.title}>TODO APP</Text>
+
+      <TextInput style={styles.input} placeholder="Enter Todo Title" />
+
+      <TextInput style={styles.input} placeholder="Enter Todo Description" />
+
+      <TouchableOpacity style={styles.submitBtn}>
+        <Text style={styles.text}>Add Todo</Text>
+      </TouchableOpacity>
+
+      <View style={styles.dividerLine} />
+
+      <View style={styles.filterContainer}>
+        {filterOptions.map((filter, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.filterBtn,
+              filter === "All" && styles.activeFilterBtn,
+            ]}
+          >
+            <Text
+              style={[
+                styles.filterText,
+                filter === "All" && styles.activeFilterText,
+              ]}
+            >
+              {filter}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <FlatList
+        style={styles.todosContainer}
+        data={[]}
+        renderItem={() => null}
+        keyExtractor={(item, index) => index.toString()}
+        ListEmptyComponent={<Text style={styles.emptyText}>No Todos</Text>}
+      />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default TodoApp;
