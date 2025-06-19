@@ -6,6 +6,13 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     paddingBottom: 20,
+    marginTop: 100,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "lightcoral",
   },
   input: {
     borderWidth: 1,
@@ -18,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   submitBtn: {
     width: "50%",
-    backgroundColor: "#000",
+    backgroundColor: "#ff6347",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
@@ -48,7 +55,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "lightcoral",
   },
   filterText: {
     color: "black",
@@ -56,13 +63,13 @@ export const styles = StyleSheet.create({
   },
   activeFilterBtn: {
     width: "30%",
-    backgroundColor: "black",
+    backgroundColor: "lightcoral",
     height: 40,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "lightcoral",
   },
   activeFilterText: {
     color: "white",
@@ -70,6 +77,13 @@ export const styles = StyleSheet.create({
   },
   todosContainer: {
     marginTop: 10,
+  },
+  emptyText: {
+    textAlign: "center",
+    fontSize: 18,
+    color: "red",
+    marginTop: 20,
+    fontWeight: "bold",
   },
   doneTodo: {
     textDecorationLine: "line-through",

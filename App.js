@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
-  StyleSheet,
 } from "react-native";
 import { styles } from "./styles";
 
