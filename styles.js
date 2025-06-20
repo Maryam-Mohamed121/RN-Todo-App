@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 20,
     marginTop: 50,
   },
+
   title: {
     fontSize: 24,
     fontWeight: "bold",

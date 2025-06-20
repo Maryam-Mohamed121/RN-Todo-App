@@ -9,6 +9,8 @@ import {
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import TodoForm from "./src/components/TodoForm";
+import Todos from "./src/components/Todos";
+import TodoItem from "./src/components/TodoItem";
 
 const TodoApp = () => {
   const filterOptions = ["All", "Active", "Done"];
@@ -18,14 +20,7 @@ const TodoApp = () => {
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>TODO APP</Text>
 
-        <TextInput style={styles.input} placeholder="Enter Todo Title " />
-
-        <TextInput style={styles.input} placeholder="Enter Todo Description" />
-
-        <TouchableOpacity style={styles.submitBtn}>
-          <Text style={styles.text}>Add Your Todo</Text>
-        </TouchableOpacity>
-        {/* <TodoForm /> */}
+        <TodoForm />
 
         {/* simple divider line  */}
         <View style={styles.dividerLine} />
@@ -50,14 +45,7 @@ const TodoApp = () => {
             </TouchableOpacity>
           ))}
         </View>
-
-        <FlatList
-          style={styles.todosContainer}
-          data={[]}
-          renderItem={() => null}
-          keyExtractor={(item, index) => index.toString()}
-          ListEmptyComponent={<Text style={styles.emptyText}>No Todos</Text>}
-        />
+        <Todos />
       </SafeAreaView>
     </SafeAreaProvider>
   );
