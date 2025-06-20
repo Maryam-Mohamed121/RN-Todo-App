@@ -50,7 +50,7 @@ const TodoApp = () => {
 
         <FlatList
           style={styles.todosContainer}
-          data={[]}
+          data={filterOptions}
           renderItem={() => null}
           keyExtractor={(item, index) => index.toString()}
           ListEmptyComponent={<Text style={styles.emptyText}>No Todos</Text>}
