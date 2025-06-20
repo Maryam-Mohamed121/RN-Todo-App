@@ -1,20 +1,38 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import TodoForm from "./src/components/TodoForm";
 import Todos from "./src/components/Todos";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TodoApp = () => {
   const filterOptions = ["All", "Active", "Done"];
 
   const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    const loadTodos = async () => {
+      try {
+        const savedTodos = await AsyncStorage.getItem("todos");
+        if (savedTodos) {
+          setTodos(JSON.parse(savedTodos));
+        }
+      } catch (e) {
+        console.log("Failed to load todos", e);
+      }
+    };
+    loadTodos();
+  }, []);
+  useEffect(() => {
+    const saveTodos = async () => {
+      try {
+        await AsyncStorage.setItem("todos", JSON.stringify(todos));
+      } catch (e) {
+        console.log("Failed to save todos", e);
+      }
+    };
+    saveTodos();
+  }, [todos]);
   const handelAddTodo = (todo) => {
     setTodos((prevTodos) => [...prevTodos, todo]);
   };
