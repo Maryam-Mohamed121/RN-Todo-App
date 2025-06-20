@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { styles } from "./styles";
+import TodoForm from "./src/components/TodoForm";
 
 const TodoApp = () => {
   const filterOptions = ["All", "Active", "Done"];
@@ -15,18 +16,11 @@ const TodoApp = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>TODO APP</Text>
+        <TodoForm />
 
-        <TextInput style={styles.input} placeholder="Enter Todo Title" />
-
-        <TextInput style={styles.input} placeholder="Enter Todo Description" />
-
-        <TouchableOpacity style={styles.submitBtn}>
-          <Text style={styles.text}>Add Your Todo</Text>
-        </TouchableOpacity>
-
+        {/* simple divider line  */}
         <View style={styles.dividerLine} />
-
+        {/* filter buttons  */}
         <View style={styles.filterContainer}>
           {filterOptions.map((filter, index) => (
             <TouchableOpacity
