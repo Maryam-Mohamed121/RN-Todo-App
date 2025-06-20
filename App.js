@@ -22,7 +22,7 @@ const TodoApp = () => {
         <TextInput style={styles.input} placeholder="Enter Todo Description" />
 
         <TouchableOpacity style={styles.submitBtn}>
-          <Text style={styles.text}>Add Todo</Text>
+          <Text style={styles.text}>Add Your Todo</Text>
         </TouchableOpacity>
 
         <View style={styles.dividerLine} />
