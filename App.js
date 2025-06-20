@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,17 +10,24 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import TodoForm from "./src/components/TodoForm";
 import Todos from "./src/components/Todos";
-import TodoItem from "./src/components/TodoItem";
 
 const TodoApp = () => {
   const filterOptions = ["All", "Active", "Done"];
+
+  const [todos, setTodos] = useState([]);
+  const handelAddTodo = (todo) => {
+    setTodos((prevTodos) => [...prevTodos, todo]);
+  };
+  const handelDeleteTodo = (id) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>TODO APP</Text>
 
-        <TodoForm />
+        <TodoForm onSubmit={handelAddTodo} />
 
         {/* simple divider line  */}
         <View style={styles.dividerLine} />
@@ -28,6 +35,7 @@ const TodoApp = () => {
         <View style={styles.filterContainer}>
           {filterOptions.map((filter, index) => (
             <TouchableOpacity
+              activeOpacity={0.7}
               key={index}
               style={[
                 styles.filterBtn,
@@ -45,7 +53,9 @@ const TodoApp = () => {
             </TouchableOpacity>
           ))}
         </View>
-        <Todos />
+        {todos.length > 0 && (
+          <Todos todos={todos} onDelete={handelDeleteTodo} />
+        )}
       </SafeAreaView>
     </SafeAreaProvider>
   );

@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   submitBtn: {
     width: "50%",
-    backgroundColor: "#ff6347",
+    backgroundColor: "lightcoral",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
@@ -88,5 +88,20 @@ export const styles = StyleSheet.create({
   },
   doneTodo: {
     textDecorationLine: "line-through",
+  },
+  todoItemcontainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "99%",
+    justifyContent: "space-between",
+    padding: 12,
+    backgroundColor: "lightcoral",
+    borderRadius: 8,
+    marginVertical: 4,
+  },
+  Todotext: {
+    fontSize: 18,
+    color: "white",
+    fontWeight: "bold",
   },
 });
