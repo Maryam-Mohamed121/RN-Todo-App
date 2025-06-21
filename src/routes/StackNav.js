@@ -5,18 +5,18 @@ import { PATHS } from "./Router";
 import Home from "../pages/Home";
 import TodoDetails from "../pages/TodoDetails";
 
-const Stack = createNativeStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 const StackNav = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
+    <Navigator screenOptions={{ headerShown: false }}>
+      <Screen
         name={PATHS.HOME}
         component={Home}
         options={{ headerTitle: "Todo App" }}
       />
-      <Stack.Screen name={PATHS.DETAILS} component={TodoDetails} />
-    </Stack.Navigator>
+      <Screen name={PATHS.DETAILS} component={TodoDetails} />
+    </Navigator>
   );
 };
 

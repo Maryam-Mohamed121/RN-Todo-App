@@ -4,7 +4,6 @@ import React from "react";
 const CompletedTasks = () => {
   return (
     <>
-      <Text>CompletedTasks</Text>
       <View
         style={{
           flex: 1,

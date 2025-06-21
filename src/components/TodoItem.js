@@ -3,6 +3,7 @@ import React from "react";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { styles } from "../../styles";
 import { useNavigation } from "@react-navigation/native";
+import { PATHS } from "../routes/Router";
 
 const TodoItem = ({ item, onDelete }) => {
   const { navigate } = useNavigation();
@@ -10,11 +11,10 @@ const TodoItem = ({ item, onDelete }) => {
     <TouchableOpacity
       style={styles.todoItemcontainer}
       onPress={() =>
-        navigate("TodoDetails", {
+        navigate(PATHS.DETAILS, {
           todo: {
             title: item.title,
             description: item.description,
-            id: item.id,
           },
         })
       }

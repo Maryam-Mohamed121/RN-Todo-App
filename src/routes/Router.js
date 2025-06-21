@@ -9,7 +9,7 @@ const { Navigator, Screen } = createBottomTabNavigator();
 export const PATHS = {
   HOME: "Home",
   COMPLETED_TASKS: "Completed Tasks",
-  DETAILS: "Todo Details",
+  DETAILS: "TodoDetails",
 };
 
 const Router = () => {
