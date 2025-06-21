@@ -4,6 +4,7 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import { styles } from "../../styles";
 import { useNavigation } from "@react-navigation/native";
 import { PATHS } from "../routes/Router";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const TodoItem = ({ item, onDelete }) => {
   const { navigate } = useNavigation();
@@ -21,10 +22,14 @@ const TodoItem = ({ item, onDelete }) => {
       activeOpacity={0.7}
     >
       <Text style={styles.Todotext}>{item.title}</Text>
-      <TouchableOpacity onPress={() => onDelete(item.id)}>
-        <Ionicons name="trash-outline" size={24} color="white" />
-        <Ionicons name="checkmark-outline" size={24} color="lightgreen" />
-      </TouchableOpacity>
+      <View style={styles.todoItemActions}>
+        <TouchableOpacity onPress={() => onDelete(item.id)}>
+          <AntDesign name="checkcircleo" size={20} color="green" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onDelete(item.id)}>
+          <Ionicons name="trash-outline" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   );
 };

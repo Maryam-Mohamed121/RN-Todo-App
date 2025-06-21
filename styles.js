@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     paddingBottom: 20,
-    marginTop: 50,
   },
 
   title: {
@@ -92,8 +91,8 @@ export const styles = StyleSheet.create({
   todoItemcontainer: {
     flexDirection: "row",
     alignItems: "center",
-    width: "99%",
-    justifyContent: "space-between",
+    width: "100%",
+    justifyContent: "center",
     padding: 12,
     backgroundColor: "lightcoral",
     borderRadius: 8,
@@ -103,5 +102,12 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: "white",
     fontWeight: "bold",
+    flex: 1,
+    marginRight: 10,
+  },
+  todoItemActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 20,
   },
 });
