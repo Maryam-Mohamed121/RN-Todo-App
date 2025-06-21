@@ -9,6 +9,7 @@ const TodoItem = ({ item, onDelete }) => {
       <Text style={styles.Todotext}>{item.title}</Text>
       <TouchableOpacity onPress={() => onDelete(item.id)}>
         <Ionicons name="trash-outline" size={24} color="white" />
+        <Ionicons name="checkmark-outline" size={24} color="lightgreen" />
       </TouchableOpacity>
     </View>
   );
