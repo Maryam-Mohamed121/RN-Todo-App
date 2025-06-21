@@ -3,9 +3,19 @@ import React from "react";
 
 const CompletedTasks = () => {
   return (
-    <View>
+    <>
       <Text>CompletedTasks</Text>
-    </View>
+      <View
+        style={{
+          flex: 1,
+          padding: 20,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text>Completed Tasks</Text>
+      </View>
+    </>
   );
 };
 

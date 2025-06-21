@@ -57,13 +57,13 @@ const Home = () => {
               key={index}
               style={[
                 styles.filterBtn,
-                filter === "All" && styles.activeFilterBtn,
+                // filter === "All" && styles.activeFilterBtn,
               ]}
             >
               <Text
                 style={[
                   styles.filterText,
-                  filter === "All" && styles.activeFilterText,
+                  // filter === "All" && styles.activeFilterText,
                 ]}
               >
                 {filter}
