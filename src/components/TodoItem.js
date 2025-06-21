@@ -9,18 +9,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 const TodoItem = ({ item, onDelete, onComplete }) => {
   const { navigate } = useNavigation();
   return (
-    <TouchableOpacity
-      style={styles.todoItemcontainer}
-      onPress={() =>
-        navigate(PATHS.DETAILS, {
-          todo: {
-            title: item.title,
-            description: item.description,
-          },
-        })
-      }
-      activeOpacity={0.7}
-    >
+    <TouchableOpacity style={styles.todoItemcontainer} activeOpacity={0.7}>
       <Text
         style={[
           styles.Todotext,
@@ -29,6 +18,14 @@ const TodoItem = ({ item, onDelete, onComplete }) => {
             color: "black",
           },
         ]}
+        onPress={() =>
+          navigate(PATHS.DETAILS, {
+            todo: {
+              title: item.title,
+              description: item.description,
+            },
+          })
+        }
       >
         {item.title}
       </Text>
