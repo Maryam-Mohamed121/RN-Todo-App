@@ -25,12 +25,12 @@ const Router = () => {
           },
           tabBarStyle: {
             position: "absolute",
-            bottom: 20,
-            width: "90%",
-            height: 80,
-            backgroundColor: "#ccc",
+            bottom: 30,
+            width: "100%",
+            height: 60,
+            backgroundColor: "#FCE4EC",
             borderWidth: 1,
-            borderColor: "#aaa",
+            borderColor: "lightcoral",
             borderRadius: 10,
           },
         }}
@@ -40,13 +40,15 @@ const Router = () => {
           component={StackNav}
           options={{
             tabBarLabel: ({ focused }) => (
-              <Text style={{ color: focused ? "blue" : "black" }}>Home</Text>
+              <Text style={{ color: focused ? "lightcoral" : "grey" }}>
+                Home
+              </Text>
             ),
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 name="home"
                 size={24}
-                color={focused ? "blue" : "black"}
+                color={focused ? "lightcoral" : "grey"}
               />
             ),
           }}
@@ -57,7 +59,7 @@ const Router = () => {
           options={{
             headerBackTitle: "Back",
             tabBarLabel: ({ focused }) => (
-              <Text style={{ color: focused ? "blue" : "black" }}>
+              <Text style={{ color: focused ? "lightcoral" : "grey" }}>
                 Completed Tasks
               </Text>
             ),
@@ -65,7 +67,7 @@ const Router = () => {
               <Ionicons
                 name="checkmark-done"
                 size={24}
-                color={focused ? "blue" : "black"}
+                color={focused ? "lightcoral" : "grey"}
               />
             ),
           }}

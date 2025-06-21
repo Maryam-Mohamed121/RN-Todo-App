@@ -7,9 +7,10 @@ import Todos from "../components/Todos";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Home = () => {
-  const filterOptions = ["All", "Active", "Done"];
-
+  const filterOptions = ["All", "In Progress", "Done"];
   const [todos, setTodos] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("All");
+
   useEffect(() => {
     const loadTodos = async () => {
       try {
@@ -39,6 +40,22 @@ const Home = () => {
   const handelDeleteTodo = (id) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
+  const handelCompleteTodo = (id) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const getFilteredTodos = () => {
+    if (selectedFilter === "All") return todos;
+    if (selectedFilter === "In Progress")
+      return todos.filter((todo) => !todo.completed);
+    if (selectedFilter === "Done")
+      return todos.filter((todo) => todo.completed);
+    return todos;
+  };
 
   return (
     <SafeAreaProvider>
@@ -57,13 +74,14 @@ const Home = () => {
               key={index}
               style={[
                 styles.filterBtn,
-                // filter === "All" && styles.activeFilterBtn,
+                selectedFilter === filter && styles.activeFilterBtn,
               ]}
+              onPress={() => setSelectedFilter(filter)}
             >
               <Text
                 style={[
                   styles.filterText,
-                  // filter === "All" && styles.activeFilterText,
+                  selectedFilter === filter && styles.activeFilterText,
                 ]}
               >
                 {filter}
@@ -71,9 +89,11 @@ const Home = () => {
             </TouchableOpacity>
           ))}
         </View>
-        {todos.length > 0 && (
-          <Todos todos={todos} onDelete={handelDeleteTodo} />
-        )}
+        <Todos
+          todos={getFilteredTodos()}
+          onDelete={handelDeleteTodo}
+          onComplete={handelCompleteTodo}
+        />
       </SafeAreaView>
     </SafeAreaProvider>
   );
