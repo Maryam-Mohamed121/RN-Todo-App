@@ -11,14 +11,12 @@ const CompletedTasks = () => {
       style={{
         flex: 1,
         padding: 20,
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Text style={{ fontWeight: "bold", fontSize: 20, marginBottom: 16 }}>
-        Completed Tasks
-      </Text>
       <FlatList
+        style={{ width: "100%" }}
         data={completedTodos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -29,16 +27,41 @@ const CompletedTasks = () => {
               backgroundColor: "#e0ffe0",
               borderRadius: 8,
               width: "100%",
+              borderWidth: 1,
+              borderColor: "#c0ffc0",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <Text style={{ textDecorationLine: "line-through", color: "#888" }}>
+            <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }}>
               {item.title}
             </Text>
-            <Text style={{ color: "#888" }}>{item.description}</Text>
+            <Text style={{ color: "#888", fontSize: 16 }}>
+              {item.description}
+            </Text>
           </View>
         )}
         ListEmptyComponent={
-          <Text style={{ color: "#aaa" }}>No completed tasks.</Text>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
+            <Text
+              style={{
+                color: "red",
+                textAlign: "center",
+                fontSize: 20,
+                fontWeight: "bold",
+              }}
+            >
+              No completed tasks.
+            </Text>
+          </View>
         }
       />
     </View>
