@@ -29,7 +29,7 @@ const Home = () => {
           dispatch(setTodos(JSON.parse(savedTodos)));
         }
       } catch (e) {
-        // handle error if needed
+        console.error("Failed to load todos from AsyncStorage:", e);
       }
     };
     loadTodos();
