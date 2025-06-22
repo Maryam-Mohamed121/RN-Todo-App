@@ -8,6 +8,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 const TodoItem = ({ item, onDelete, onComplete }) => {
   const { navigate } = useNavigation();
+
   return (
     <TouchableOpacity style={styles.todoItemcontainer} activeOpacity={0.7}>
       <Text

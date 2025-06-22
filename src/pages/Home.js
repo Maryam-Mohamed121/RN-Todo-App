@@ -1,58 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { styles } from "../../styles";
 import TodoForm from "../components/TodoForm";
 import Todos from "../components/Todos";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addTodo,
+  deleteTodo,
+  markAsCompleted,
+  updateFilter,
+  FILTRATION_TYPES,
+  setTodos,
+} from "../Redux/slices/todos_slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const TODOS_KEY = "TODOS_LIST";
+
 const Home = () => {
-  const filterOptions = ["All", "In Progress", "Done"];
-  const [todos, setTodos] = useState([]);
-  const [selectedFilter, setSelectedFilter] = useState("All");
+  const dispatch = useDispatch();
+  const { todos, filter } = useSelector((state) => state.todos);
 
   useEffect(() => {
     const loadTodos = async () => {
       try {
-        const savedTodos = await AsyncStorage.getItem("todos");
+        const savedTodos = await AsyncStorage.getItem(TODOS_KEY);
         if (savedTodos) {
-          setTodos(JSON.parse(savedTodos));
+          dispatch(setTodos(JSON.parse(savedTodos)));
         }
       } catch (e) {
-        console.log("Failed to load todos", e);
+        // handle error if needed
       }
     };
     loadTodos();
-  }, []);
+  }, [dispatch]);
+
   useEffect(() => {
-    const saveTodos = async () => {
-      try {
-        await AsyncStorage.setItem("todos", JSON.stringify(todos));
-      } catch (e) {
-        console.log("Failed to save todos", e);
-      }
-    };
-    saveTodos();
+    AsyncStorage.setItem(TODOS_KEY, JSON.stringify(todos));
   }, [todos]);
-  const handelAddTodo = (todo) => {
-    setTodos((prevTodos) => [...prevTodos, todo]);
+
+  const filterOptions = [
+    FILTRATION_TYPES.ALL,
+    FILTRATION_TYPES.IN_PROGRESS,
+    FILTRATION_TYPES.COMPLETED,
+  ];
+
+  const handleAddTodo = (todo) => {
+    dispatch(addTodo(todo));
   };
-  const handelDeleteTodo = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+
+  const handleDeleteTodo = (id) => {
+    dispatch(deleteTodo(id));
   };
-  const handelCompleteTodo = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+
+  const handleCompleteTodo = (id) => {
+    dispatch(markAsCompleted(id));
+  };
+
+  const handleFilterChange = (selectedFilter) => {
+    dispatch(updateFilter(selectedFilter));
   };
 
   const getFilteredTodos = () => {
-    if (selectedFilter === "All") return todos;
-    if (selectedFilter === "In Progress")
+    if (filter === FILTRATION_TYPES.ALL) return todos;
+    if (filter === FILTRATION_TYPES.IN_PROGRESS)
       return todos.filter((todo) => !todo.completed);
-    if (selectedFilter === "Done")
+    if (filter === FILTRATION_TYPES.COMPLETED)
       return todos.filter((todo) => todo.completed);
     return todos;
   };
@@ -62,37 +75,37 @@ const Home = () => {
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>TODO APP</Text>
 
-        <TodoForm onSubmit={handelAddTodo} />
+        <TodoForm onSubmit={handleAddTodo} />
 
-        {/* simple divider line  */}
         <View style={styles.dividerLine} />
-        {/* filter buttons  */}
+
         <View style={styles.filterContainer}>
-          {filterOptions.map((filter, index) => (
+          {filterOptions.map((filterOption, index) => (
             <TouchableOpacity
               activeOpacity={0.7}
               key={index}
               style={[
                 styles.filterBtn,
-                selectedFilter === filter && styles.activeFilterBtn,
+                filter === filterOption && styles.activeFilterBtn,
               ]}
-              onPress={() => setSelectedFilter(filter)}
+              onPress={() => handleFilterChange(filterOption)}
             >
               <Text
                 style={[
                   styles.filterText,
-                  selectedFilter === filter && styles.activeFilterText,
+                  filter === filterOption && styles.activeFilterText,
                 ]}
               >
-                {filter}
+                {filterOption}
               </Text>
             </TouchableOpacity>
           ))}
         </View>
+
         <Todos
           todos={getFilteredTodos()}
-          onDelete={handelDeleteTodo}
-          onComplete={handelCompleteTodo}
+          onDelete={handleDeleteTodo}
+          onComplete={handleCompleteTodo}
         />
       </SafeAreaView>
     </SafeAreaProvider>

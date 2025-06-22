@@ -1,10 +1,10 @@
 import { View, Text, FlatList } from "react-native";
 import React from "react";
-import { useRoute } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 const CompletedTasks = () => {
-  const { params } = useRoute();
-  const completedTodos = params?.completedTodos || [];
+  const { todos } = useSelector((state) => state.todos);
+  const completedTodos = todos.filter((todo) => todo.completed);
 
   return (
     <View
